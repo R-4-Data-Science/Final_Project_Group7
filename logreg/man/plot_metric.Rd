@@ -14,7 +14,7 @@ plot_metric(resp, pred, metric)
 \item{metric}{This can be any of the following metrics: "Prevalence", "Accuracy","Sensitivity", "Specificity", "False Discovery Rate","Diagnostic Odds Ratio"}
 }
 \value{
-A \code{plot} that shows
+A \code{plot} that shows the entered metric over a grid of cut-off values for prediction going from 0.1 to 0.9 with steps of 0.1.
 }
 \description{
 This function conducts logistic regression on data and plots a given metric that visualizes the performance of the regression.
