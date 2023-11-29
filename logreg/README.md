@@ -16,18 +16,8 @@ First, install the package.
 devtools::install_github("R-4-Data-Science/Final_Project_Group7/logreg")
 ```
 
-    ## Downloading GitHub repo R-4-Data-Science/Final_Project_Group7@HEAD
-
-    ## ── R CMD build ─────────────────────────────────────────────────────────────────
-    ##          checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpmYZp96\remotes4b4c586d310a\R-4-Data-Science-Final_Project_Group7-cca9732\logreg/DESCRIPTION' ...     checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpmYZp96\remotes4b4c586d310a\R-4-Data-Science-Final_Project_Group7-cca9732\logreg/DESCRIPTION' ...   ✔  checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpmYZp96\remotes4b4c586d310a\R-4-Data-Science-Final_Project_Group7-cca9732\logreg/DESCRIPTION'
-    ##       ─  preparing 'logreg':
-    ##    checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
-    ##       ─  checking for LF line-endings in source and make files and shell scripts
-    ##   ─  checking for empty or unneeded directories
-    ##      Omitted 'LazyData' from DESCRIPTION
-    ##       ─  building 'logreg_0.1.0.tar.gz'
-    ##      
-    ## 
+    ## Skipping install of 'logreg' from a github remote, the SHA1 (05384be2) has not changed since last install.
+    ##   Use `force = TRUE` to force installation
 
 ``` r
 library(logreg)
@@ -91,15 +81,15 @@ predictor variables.
 ```
 
     ##                [,1]          [,2]
-    ##  [1,]  0.2092610293  1.8127815587
-    ##  [2,] -0.0883697737 -0.0548166302
-    ##  [3,] -0.7633962435  0.3422808849
-    ##  [4,] -0.2168808607 -0.1583529095
-    ##  [5,] -0.3329686368  0.0395685657
-    ##  [6,]  0.0003138738  0.0003995657
-    ##  [7,] -0.6942199441  0.3114253453
-    ##  [8,] -0.3059821691  0.4974252112
-    ##  [9,] -0.1848677731  0.6271936640
+    ##  [1,]  0.3802187782  1.2555372925
+    ##  [2,] -0.0852935709 -0.0506996446
+    ##  [3,] -0.4084016279  0.1684568487
+    ##  [4,] -0.2262313203 -0.1510075334
+    ##  [5,] -0.2613161350  0.0945346720
+    ##  [6,]  0.0003110339  0.0003882502
+    ##  [7,] -0.3503624583  0.3608125796
+    ##  [8,] -0.6798036716  0.2058494058
+    ##  [9,] -0.2745659486  0.9439280807
 
 ## log_plot
 
