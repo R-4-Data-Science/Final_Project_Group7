@@ -16,21 +16,8 @@ First, install the package.
 devtools::install_github("R-4-Data-Science/Final_Project_Group7/logreg")
 ```
 
-    ## Downloading GitHub repo R-4-Data-Science/Final_Project_Group7@HEAD
-
-    ## ── R CMD build ─────────────────────────────────────────────────────────────────
-    ##          checking for file 'C:\Users\alec3\AppData\Local\Temp\Rtmp4MWPYa\remotesb0411353e6c\R-4-Data-Science-Final_Project_Group7-6667d36\logreg/DESCRIPTION' ...  ✔  checking for file 'C:\Users\alec3\AppData\Local\Temp\Rtmp4MWPYa\remotesb0411353e6c\R-4-Data-Science-Final_Project_Group7-6667d36\logreg/DESCRIPTION' (336ms)
-    ##       ─  preparing 'logreg':
-    ##    checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
-    ##       ─  checking for LF line-endings in source and make files and shell scripts
-    ## ─  checking for empty or unneeded directories
-    ##    Omitted 'LazyData' from DESCRIPTION
-    ##       ─  building 'logreg_0.1.0.tar.gz'
-    ##      
-    ## 
-
-    ## Installing package into 'C:/Users/alec3/AppData/Local/R/win-library/4.3'
-    ## (as 'lib' is unspecified)
+    ## Skipping install of 'logreg' from a github remote, the SHA1 (984178ec) has not changed since last install.
+    ##   Use `force = TRUE` to force installation
 
 ``` r
 library(logreg)
@@ -94,15 +81,15 @@ predictor variables.
 ```
 
     ##                [,1]          [,2]
-    ##  [1,]  0.2967890540  2.8217476276
-    ##  [2,] -0.0945557623 -0.0566043674
-    ##  [3,] -0.9614484715 -0.0241900495
-    ##  [4,] -0.2450752649 -0.1609905060
-    ##  [5,] -0.2882529544  0.0862196069
-    ##  [6,]  0.0003135992  0.0003900123
-    ##  [7,] -0.7678344917  0.4547027489
-    ##  [8,] -0.4345825461  0.5042639300
-    ##  [9,] -0.4267732450  0.7426265984
+    ##  [1,]  0.2771601460  1.6752256337
+    ##  [2,] -0.0885173226 -0.0491186752
+    ##  [3,] -0.4972519922  0.3026119026
+    ##  [4,] -0.2421341721 -0.1473768075
+    ##  [5,] -0.2942648535  0.0180878379
+    ##  [6,]  0.0003071451  0.0003935793
+    ##  [7,] -0.2865783936  0.4978725124
+    ##  [8,] -0.5359926496  0.3850418615
+    ##  [9,] -0.5231996435  0.7027059417
 
 ## log_plot
 

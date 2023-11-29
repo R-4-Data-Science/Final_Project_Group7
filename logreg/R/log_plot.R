@@ -40,7 +40,6 @@ log_plot <- function(pred, resp){
 
   whole[,c] <- x_mat %*% optim_beta_demo
   whole <- whole[order(whole[,c]),]
-  plot(whole[,(c-1)] ~ whole[,c])
   aaa <- cbind(whole[,c] , whole[,(c-1)])
   aaa <- as.data.frame(aaa)
   plot(aaa[,2]~aaa[,1], xlab="X%*%Beta"
