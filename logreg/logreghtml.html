@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Alexander Miller, Yizhong Zhang" />
+
+<meta name="date" content="2023-11-29" />
+
+<title>Logistic Regression</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Logistic Regression</h1>
+<h4 class="author">Alexander Miller, Yizhong Zhang</h4>
+<h4 class="date">2023-11-29</h4>
+
+
+
+<p>This package implements logistic regression using numerical
+optimization. This can be found in the Final_Project_Group7 repository
+within the R-4-Data-Science organization. The package name is logreg
+which has a repository within Final_Project_Group7. The functions in
+this package allow for you to:obtain the least squares estimators. This
+is used as a starting point for optimization, bootstrap confidence
+intervals for each predictor in the logistic regression, plot the fitted
+logistic curve to the responses, obtain a confusion matrix on the
+logistic regression and print metrics calculated from the matrix, and
+have the ability to plot the given metrics from 0.1 to 0.9.</p>
+<p>First, install the package.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;R-4-Data-Science/Final_Project_Group7/logreg&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co">#&gt; Downloading GitHub repo R-4-Data-Science/Final_Project_Group7@HEAD</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co">#&gt; ── R CMD build ─────────────────────────────────────────────────────────────────</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#&gt;   </span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  </span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  </span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>✔  checking <span class="cf">for</span> file <span class="st">&#39;C:\Users</span><span class="sc">\a</span><span class="st">lec3\AppData\Local\Temp\RtmpcZ5h70</span><span class="sc">\r</span><span class="st">emotes313841bb4246\R-4-Data-Science-Final_Project_Group7-cca9732\logreg/DESCRIPTION&#39;</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  </span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  </span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  </span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>─  preparing <span class="st">&#39;logreg&#39;</span><span class="sc">:</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="co">#&gt;    checking DESCRIPTION meta-information ...</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  </span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>✔  checking DESCRIPTION meta<span class="sc">-</span>information</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>  </span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>  </span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>  </span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>─  checking <span class="cf">for</span> LF line<span class="sc">-</span>endings <span class="cf">in</span> source and make files and shell scripts</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>  </span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>─  checking <span class="cf">for</span> empty or unneeded directories</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="co">#&gt;    Omitted &#39;LazyData&#39; from DESCRIPTION</span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>  </span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>  </span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>  </span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>─  building <span class="st">&#39;logreg_0.1.0.tar.gz&#39;</span></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>  </span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>   </span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a><span class="co">#&gt; Installing package into &#39;C:/Users/alec3/AppData/Local/R/win-library/4.3&#39;</span></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a><span class="co">#&gt; (as &#39;lib&#39; is unspecified)</span></span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a><span class="fu">library</span>(logreg)</span></code></pre></div>
+<p>In order to show examples, we will load data from class and format it
+for use.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;expenses.csv&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>mydata<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(mydata<span class="sc">$</span>sex, </span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>                     <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>mydata<span class="sc">$</span>smoker <span class="ot">&lt;-</span> <span class="fu">factor</span>(mydata<span class="sc">$</span>smoker, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;yes&quot;</span>,<span class="st">&quot;no&quot;</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>mydata<span class="sc">$</span>region_northeast <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(mydata<span class="sc">$</span>region<span class="sc">==</span><span class="st">&quot;northeast&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>mydata<span class="sc">$</span>region_northwest <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(mydata<span class="sc">$</span>region<span class="sc">==</span><span class="st">&quot;northwest&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>mydata<span class="sc">$</span>region_southeast <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(mydata<span class="sc">$</span>region<span class="sc">==</span><span class="st">&quot;southeast&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> mydata[,<span class="sc">-</span><span class="dv">6</span>]</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(mydata)</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(mydata)</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">matrix</span>(mydata, <span class="at">ncol=</span><span class="dv">9</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>X <span class="ot">&lt;-</span> mydata[, <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="dv">6</span><span class="sc">:</span><span class="dv">9</span>)]</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>Y <span class="ot">&lt;-</span> mydata[, <span class="dv">5</span>]</span></code></pre></div>
+<div id="init" class="section level3">
+<h3>Init</h3>
+<p>This function gives the starting value for the predictors of the
+logistic regression. The specific calculation uses the least squares
+formula given by <span class="math inline">\((X^TX)^{−1}X^Ty\)</span>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>(init_beta_demo <span class="ot">&lt;-</span> <span class="fu">init</span>(<span class="at">resp =</span> Y, <span class="at">pred=</span> X))</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt;            [,1]</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; c  4.648504e-01</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt;   -7.873921e-03</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt;   -2.118781e-02</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt;   -1.046147e-02</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt;   -1.329449e-02</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt;    2.997526e-05</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt;   -2.108683e-02</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt;   -1.855320e-02</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt;    2.314974e-02</span></span></code></pre></div>
+</div>
+<div id="boot_ci" class="section level2">
+<h2>Boot_CI</h2>
+<p>This function will conduct a bootstrap routine for each predictor or
+beta value for the logistic regression curve. The user is able to choose
+the amount of bootstraps to conduct as well as the confidence level for
+the intervals. Here, we will use it on the loaded data. We will use the
+default values for n and alpha and X and Y for our response and
+predictor variables.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>(Boot_CI_demo <span class="ot">&lt;-</span> <span class="fu">Boot_CI</span>(<span class="at">n=</span><span class="dv">20</span>, <span class="at">alpha=</span><span class="fl">0.05</span>, <span class="at">pred=</span> X, <span class="at">resp=</span> Y))</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt;               [,1]          [,2]</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt;  [1,]  0.303083231  2.4593834348</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt;  [2,] -0.096045541 -0.0596541490</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt;  [3,] -0.990476765  0.1109404769</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt;  [4,] -0.250593957 -0.1529988862</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt;  [5,] -0.281086639  0.0391130404</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt;  [6,]  0.000309055  0.0004052907</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt;  [7,] -0.489400900  0.3635667733</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt;  [8,] -0.880386502  0.2474057601</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt;  [9,] -0.533900454  0.7601848832</span></span></code></pre></div>
+</div>
+<div id="log_plot" class="section level2">
+<h2>log_plot</h2>
+<p>This function will plot the optimized logistic curve for the given
+data, where the y-axis is the binary response y while the x-axis
+represents a sequence of values from the range of fitted values from the
+logistic regression.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">log_plot</span>(<span class="at">pred=</span> X, <span class="at">resp=</span> Y)</span></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAY1BMVEUAAAAAADoAAGYAOjoAOpAAZrYA/wA6AAA6ADo6AGY6Ojo6kJA6kNtmAABmADpmkJBmtv+QOgCQOjqQZgCQkGaQ2/+2ZgC225C2///bkDrb/7bb////tmb/25D//7b//9v///8gZhTAAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAKoklEQVR4nO2di3rbuhGEJzlW3NPabdzTqFFN2Xz/pyzBi0zJIrAgFpyR7T9xPlkCscMJbiRACO0XUcAWoA7YAtQBW4A6YAtQB2wB6oAtQB2wBagDtgB1wBagDtgC1AFbgDpgC1AHbAHqgC1AHbAFqAO2AHXAFqAO2ALUAVuAOmALUAdsAeqALUAdsAWoA7YAdcAWoA7YAtQBW4A6YAtQB2wB6oAtQB2wBagDtgB1wBagDtgC1AFbgDpgC1AHbAHqgC1AHbAFqAO2AHXAFqAO2ALUAVuAOmALUAdsAeqALUAdsAWoA7YAdcAWoA7YAtQBW4A6YAtQB2wB6oAtQB2wBagDtgB1wBagDtgC1AFbgDpgC1AHbAHqgC1AHbAFqAO2AHXAFqAO2ALUAVuAOmALUAdsAeqALUAdsAWog+nFyyN2RB2y4O3lAcADTYgqOPvty6N34OL3YNH33wwlomD+S9O587N9fbp7JqkRBKdXXSuNwZnmqwi9genFy+O3Xw7Z3QzZBvngkN27ExnPZvb6WpLTJ+38iPmvp+yzhJoTbpXd1f9rDDmPr68kGX7a8fPpiOnPTBdmPxudkW92C5Xh/N+riTB+PGo4s+skDO2PHye/bYJKzuYtl7Oz8cnJyaAf72AY5Jedt0FX7FltUNfP3z3vywbS5rjLOVwzCGvboOAI5row+8k8o+bbr8Pd88tjkUPmuJEs3hWNgl6sLzFw6cVenx7azqD2UDRKNMfdiKFKXQHWHE4JXx5/9gaVDaPNcTfC0aCpBO2LLsTMcTfC0aCxDTp0V6sFmONuhKdB/dUqCi/IzHG34YerQR44Z1fKoj9fBg24GhRGQIfpltACe2D3+gQsNlTmuNvgalDXfR3vd+0+MrfR93Jh8mNxOGmOuw2eBoVxUNOVjMg4KIwEQmfXDlYVxd0Gb4P2nTmRkXRIMhq4ZKM57iYsd2Krqtju5TFciy1XsZsrQcv+rGuku0HQ61NsevXUBvVWFcXdBF+DLNxYL7a9QVtnV4ivQX3JQOG8qjnuFkTa6FWNdI4zS32dOe4WRPxZ1c0X3Eo8v4GsgrdBRfc5cuNuga9B8Q4+OzsFfA3qrzNSJBtyc9wNiLXRq6oYkr3YYVpd1SwtszLH3YCYP3XGQbPx8y1camxv0Kwdv4WLVXeDjveJe9KfvAQN7Up0VuP04S20QdE2euW8WGCpbPRMLfliGnPc+kT9KRgofpiZVW+DTCXInh0fb4MsbVBOdmziTVCdXiwvOzJxf75umH0ZlKKCQX0fXvgUgjludfwNGudzyhohc9zaJNroVd380H19kAVUCX/WDBT/ORSdDzJQ9DdoKkEfY6CYqmHr7yiuGyjK3bRP+VNyR7Foaswcty7JAvTJx0Fpfz63QQZ/ai3B84tbEYs/lZbgOcatiMWfOkvwPOPWw1SA6izB84xbDZs/dZbgecathdGfSkvwHONWwupP3W7+eL842l6TnSdWf2rNrCYH2znZVcBcgNbeMEs8szrOF8qWILs/K2+YJZ9ZDc24rkEZ/qycFzM8s7r/9kvYIHtaZCe0PrN6wMPnNMj8zOrx/g9Ng3Jq2Po2yHDD7PVpOY05bgVy/Fk/7XPDM6vVDcpBcSF5ZYMWH+Ax5aJwT7qyQbe/kLx2FXPZ2s0ctwLVS5BhSkN6IblAI629kJxvkPYy4Kxx4mdcSJ7lz+csQTmp4Z4wIL2QXMEg6YXktQ3y2ZHcHNef+iXIY7dtc1x38jqxtVWs2CNzXHfy/FnfBhXuSG6O684mBpXvSG6O6059g1x2JDfHdae6QU47kpdnsZLqBhXdMMuP684GJei2b5jVb4Nu/IbZBiWoeA1wTlx3thoHrUPgpr22QbWyy2CbcdBXFYsk3N89H3axlRuucd3ZoJF+aJuw/OU2n/bJvJhfOQ46/vm7/1mPOa43mf6sHEmHh+q+DFpKGNYj7B9ut4rlpceKhPtd6MnKxtPmuN5sYZAHztnZETFId25+A4MMW5UKz81vYFB6q1LhmdXcYdDKgWIC4bn5XH/q3DDTLUHZBWjVQDE9sSo7N5/tz6o7ioYtBTTn5n/kFyDuHcXx1hnqMIt29r18K4S6JrRnh2DR/C6jhyu48m2O6+2pb1BkIXn4u3wyvqwTPwp1ThjPZVYBcOWrKT0IxagdAzgozkvYDYLc2qDx75palPiUaJAbaKu1QcO/bmXePWGP7WLVUiIKvHLBnM0sYXoXPOGL1VyQn3DcgSqyxsNyqXEzZBs0nX3kkUzDxaotlnKCxQMM2yUbSpAtlnKCxQOmi9XYqacvVm2xlBMsHzCcdBNdZ5a8WDXGEk5w/QCfLfBsscQTFB9QQDKWQoLiAwpIxlJIUHxAAclYCgmKDyggGUshQfEBnw2wBagDtgB1wBagDtgC1AFbgDpgC1AHbAHqgC1AHbAFqAO2AHXAFqAO2ALUwXahhtuWi8u0msQehYnDp0cElrMZEqSyuQTmlMUc/xY7/3AzPHpDPH54d+L9veLlbMYEiWzegazURUTn0oYppdhXMsSn4prhZvpyNmOC7Bk9ZKUu4hAr18NzarGtiKOHN3joz3wxmylBPJsrIC95Cfu/Y3nrlKHkx/57o4dPx8ayGd5NZXMJ7EkLGTbrXtrxfGg3Io1Q/PB2PP9YNn2CZDaXwJzSh6UykjQofnhrNSiZzSWwJnRi6ZnYdBWLHt6aq1gqm0tgTVjCbN+mpV423UhHD28ngyLZzA2y9/WwJixm0L5URpLdfPzw6aNYNjMHNatYL3uxeUwOFOOHTycdyWbsxRLZXAJzynL2QORxh0NqO/T44VOpWM5mTJDI5hLYk35OwBagDtgC1AFbgDpgC1AHbAHqgC1AHbAFqAO2AHXAFqAO2ALUAVuAOmALUAdsAeqALUAdsAWoA7YAdcAWoA7YAtQBW4A6YAtQB2wB6oAtQB2wBagDtgB1wBagDtgC1AEz+PF+2MIhbHlxvO/3c3h9GubN+6WE5+/t+30PzifeG4+vk4mC2gGiDNthHO8fwrqVfveQpl+50nz7zz8ed+fvjfvSnO3f4/N9O1FQO0CcsMNub0JY0nS4e37993D6r0/dBxfvDQad7Tn78Q16edwN68FGM8bC0jZ3f+0u35sM6teQ9WvWuioY6mDmgpY8UCtjI8f7f/Vrvvrq9DAVlnb/8/jn78v3hioW7Ar1LFTM3q2wJCq2cVYZqJSvmWlftL5Bbs7Xzp2/tz9tzTNUs+b772BQ+CqH0u9LiYBK+Vp5fZrtx9MVlndfO/D23lCCGuzGNXadKadts+rVMVTK18r+7n+Pp2LTFZauvpzvovb23vh+164341ZHg0Fde/T9vx+1BIWt9077ffWF5eF8CersvdGgrk0/rdLsv04mePNRq9jxvl9zOp5vs2vfGTR7bypBd8+n3j28GFbYf8wq1o92pucn2r67uqhi8/emNujn2Gl1vgbvQuHpWimPr7C8Birla6FroKc2tu+7wz8XjfT8vfmlxvSFwvuuU+sX/u5r9fOok+3HAWwB6oAtQB2wBagDtgB1wBagDtgC1AFbgDpgC1AHbAHqgC1AHbAFqAO2AHXAFqAO2ALUAVuAOmALUAdsAeqALUAdsAWoA7YAdcAWoA7YAtQBW4A6/weF2xd12k0mAAAAAABJRU5ErkJggg==" /><!-- --></p>
+</div>
+<div id="conf_mat" class="section level2">
+<h2>conf_mat</h2>
+<p>This function will create a “confusion matrix” using a cut-off value
+for prediction at 0.5. It will also print the Prevalence, Accuracy,
+Sensitivity, Specificity, False Discovery Rate, and Diagnostic Odds
+Ratio metrics when run which can be calculated by values within the
+matrix. The matrix is 3x3 with values representing the performance of
+the logistic regression curve that we obtain.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">conf_mat</span>(<span class="at">pred =</span> X, <span class="at">resp =</span> Y)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; The Prevalence is 0.204783</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; The Accuracy is 0.949925</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; The Sensitivity is 1.000000</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; The Specificity is 0.937030</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; The False Discovery Rate is 0.196481</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; The Diagnostic Odds Ratio is Inf</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt; [1,] 1338  341  997</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt; [2,]  274  274    0</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; [3,] 1064   67  997</span></span></code></pre></div>
+</div>
+<div id="plot_metric" class="section level2">
+<h2>plot_metric</h2>
+<p>This function conducts logistic regression on the given data and
+plots a given metric that visualizes the performance of the regression
+over a grid of cut-off values for prediction going from 0.1 to 0.9 with
+steps of 0.1. The metrics that can be entered are the same as the
+metrics printed in conf_mat.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">plot_metric</span>(<span class="at">resp=</span>Y, <span class="at">pred=</span>X, <span class="at">metric =</span> <span class="st">&quot;Accuracy&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
