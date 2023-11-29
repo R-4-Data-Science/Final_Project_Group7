@@ -16,8 +16,21 @@ First, install the package.
 devtools::install_github("R-4-Data-Science/Final_Project_Group7/logreg")
 ```
 
-    ## Skipping install of 'logreg' from a github remote, the SHA1 (38da8a18) has not changed since last install.
-    ##   Use `force = TRUE` to force installation
+    ## Downloading GitHub repo R-4-Data-Science/Final_Project_Group7@HEAD
+
+    ## ── R CMD build ─────────────────────────────────────────────────────────────────
+    ##          checking for file 'C:\Users\alec3\AppData\Local\Temp\Rtmp4MWPYa\remotesb0411353e6c\R-4-Data-Science-Final_Project_Group7-6667d36\logreg/DESCRIPTION' ...  ✔  checking for file 'C:\Users\alec3\AppData\Local\Temp\Rtmp4MWPYa\remotesb0411353e6c\R-4-Data-Science-Final_Project_Group7-6667d36\logreg/DESCRIPTION' (336ms)
+    ##       ─  preparing 'logreg':
+    ##    checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
+    ##       ─  checking for LF line-endings in source and make files and shell scripts
+    ## ─  checking for empty or unneeded directories
+    ##    Omitted 'LazyData' from DESCRIPTION
+    ##       ─  building 'logreg_0.1.0.tar.gz'
+    ##      
+    ## 
+
+    ## Installing package into 'C:/Users/alec3/AppData/Local/R/win-library/4.3'
+    ## (as 'lib' is unspecified)
 
 ``` r
 library(logreg)
@@ -81,15 +94,15 @@ predictor variables.
 ```
 
     ##                [,1]          [,2]
-    ##  [1,]  0.2530258020  2.6637591665
-    ##  [2,] -0.0901629027 -0.0585671388
-    ##  [3,] -0.7383367661  0.1588003516
-    ##  [4,] -0.2468532650 -0.1532258633
-    ##  [5,] -0.2352278024  0.0682297496
-    ##  [6,]  0.0002975466  0.0004183005
-    ##  [7,] -0.6874760438  0.5490066731
-    ##  [8,] -0.9694004628  0.3121271076
-    ##  [9,] -0.6977314948  0.7579398058
+    ##  [1,]  0.2967890540  2.8217476276
+    ##  [2,] -0.0945557623 -0.0566043674
+    ##  [3,] -0.9614484715 -0.0241900495
+    ##  [4,] -0.2450752649 -0.1609905060
+    ##  [5,] -0.2882529544  0.0862196069
+    ##  [6,]  0.0003135992  0.0003900123
+    ##  [7,] -0.7678344917  0.4547027489
+    ##  [8,] -0.4345825461  0.5042639300
+    ##  [9,] -0.4267732450  0.7426265984
 
 ## log_plot
 
@@ -102,11 +115,7 @@ regression.
 log_plot(pred= X, resp= Y)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
-
-    ## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-
-![](README_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->![](README_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
 
 ## conf_mat
 
