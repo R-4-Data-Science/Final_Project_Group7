@@ -64,7 +64,11 @@ plot_metric <- function(resp, pred, metric){
     plot(Specificity~step, xlab="cut-off value"
          , ylab="Specificity")
   }
-  if(metric == "The False Discovery Rate"){
+<<<<<<< HEAD
+  if(metric == "The_False_Discovery_Rate"){
+=======
+  if(metric == "False_Discovery_Rate"){
+>>>>>>> d26c25076cd7ccedbd505968b2805fd2de2867cd
     The_False_Discovery_Rate <- rep(0, 9)
     step <- seq(0.1, 0.9, by = 0.1)
     for(i in 1:9){
@@ -73,7 +77,11 @@ plot_metric <- function(resp, pred, metric){
     plot(The_False_Discovery_Rate~step, xlab="cut-off value"
          , ylab="The False Discovery Rate")
   }
-  if(metric == "The Diagnostic Odds Ratio"){
+<<<<<<< HEAD
+  if(metric == "The_Diagnostic_Odds_Ratio"){
+=======
+  if(metric == "Diagnostic_Odds_Ratio"){
+>>>>>>> d26c25076cd7ccedbd505968b2805fd2de2867cd
     The_Diagnostic_Odds_Ratio <- rep(0, 9)
     step <- seq(0.1, 0.9, by = 0.1)
     vec_1 <- rep(0,9)
