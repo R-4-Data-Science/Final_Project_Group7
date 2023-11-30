@@ -367,7 +367,42 @@ the given online address.</p>
 <p>Firstly, we need to install the package and library it. The following
 codes and output would show the package could be installed and
 library.</p>
-<pre><code>devtools::install_github(&quot;R-4-Data-Science/Final_Project_Group7/logreg&quot;)</code></pre>
+<pre class="r"><code>devtools::install_github(&quot;R-4-Data-Science/Final_Project_Group7/logreg&quot;, force=TRUE)</code></pre>
+<pre><code>## ── R CMD build ─────────────────────────────────────────────────────────────────
+##   
+  
+  
+   checking for file &#39;C:\Users\张易中\AppData\Local\Temp\Rtmp6zbhWk\remotes4b944a903fff\R-4-Data-Science-Final_Project_Group7-73ef9b5\logreg/DESCRIPTION&#39; ...
+  
+✔  checking for file &#39;C:\Users\张易中\AppData\Local\Temp\Rtmp6zbhWk\remotes4b944a903fff\R-4-Data-Science-Final_Project_Group7-73ef9b5\logreg/DESCRIPTION&#39;
+## 
+  
+  
+  
+─  preparing &#39;logreg&#39;:
+##    checking DESCRIPTION meta-information ...
+  
+✔  checking DESCRIPTION meta-information
+## 
+  
+  
+  
+─  checking for LF line-endings in source and make files and shell scripts
+## 
+  
+─  checking for empty or unneeded directories
+## 
+  
+   Omitted &#39;LazyData&#39; from DESCRIPTION
+## 
+  
+  
+  
+─  building &#39;logreg_0.1.0.tar.gz&#39;
+## 
+  
+   
+## </code></pre>
 <pre class="r"><code>library(logreg)</code></pre>
 <p>The package <code>logreg</code> implements logistic regression using
 numerical optimization. The functions in this package allow for you to
@@ -521,15 +556,15 @@ default value of <code>n</code> and <code>α</code> would be 20 and
 <pre class="r"><code>Boot_CI_demo &lt;- Boot_CI(pred= X, resp= Y)
 Boot_CI_demo</code></pre>
 <pre><code>##                [,1]         [,2]
-##  [1,]  0.2310434983  1.043033101
-##  [2,] -0.0877064588 -0.055626795
-##  [3,] -0.1274495041  0.969010214
-##  [4,] -0.2458017620 -0.144400310
-##  [5,] -0.4081000924  0.085607047
-##  [6,]  0.0003102895  0.000424777
-##  [7,] -0.6592829784  0.272097535
-##  [8,] -0.6989574386  0.286568004
-##  [9,] -0.2187404576  0.389965467</code></pre>
+##  [1,]  0.2447602801  1.136147089
+##  [2,] -0.0920356975 -0.057942321
+##  [3,] -0.1586194986  1.366408895
+##  [4,] -0.2185524303 -0.160003439
+##  [5,] -0.3327083482  0.072488199
+##  [6,]  0.0002976849  0.000411652
+##  [7,] -0.7010409462  0.486271356
+##  [8,] -0.4095538195  0.190581581
+##  [9,] -0.2730732385  0.602373437</code></pre>
 <p>Now, we get a matrix whose dimension is 9 <span class="math inline">\(\times\)</span> 2. The number of rows is 9 because
 the vector <code>β</code> has 9 elements, they are from <code>β_0</code>
 to <code>β_8</code>. The first column is the lower bound of the
@@ -541,15 +576,15 @@ value of <code>n</code> and <code>α</code>.</p>
 <pre class="r"><code>Boot_CI_demo_new &lt;- Boot_CI(pred= X, resp= Y, n =10, alpha = 0.5)
 Boot_CI_demo_new</code></pre>
 <pre><code>##                [,1]          [,2]
-##  [1,]  0.4408895386  0.6241680044
-##  [2,] -0.0814436880 -0.0620525873
-##  [3,]  0.0518977214  0.4376256649
-##  [4,] -0.1937027664 -0.1749346486
-##  [5,] -0.2711295264 -0.0965437141
-##  [6,]  0.0003218691  0.0003586124
-##  [7,] -0.2287291966  0.1858044520
-##  [8,] -0.1719433904 -0.0154018806
-##  [9,]  0.1191374508  0.3328070138</code></pre>
+##  [1,]  0.4389153902  0.5431205827
+##  [2,] -0.0862066457 -0.0632406158
+##  [3,]  0.2595097048  0.5952313165
+##  [4,] -0.2113892907 -0.1611790040
+##  [5,] -0.1139104014 -0.0507206025
+##  [6,]  0.0003280006  0.0003606561
+##  [7,] -0.2469258322  0.0714457335
+##  [8,] -0.4300126071  0.0281823402
+##  [9,] -0.0127748512  0.2900207515</code></pre>
 <p>Now, we get another matrix which is the confidence interval where
 <code>n</code>=10 and <code>α</code>=0.5. This is the 0.5 confidence
 intervals for β with the number of bootstraps is 10.</p>
