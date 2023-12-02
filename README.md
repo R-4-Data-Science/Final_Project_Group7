@@ -9,9 +9,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Source: [The github repository](https://github.com/R-4-Data-Science/Final_Project_Group7)
-
-[The Online Address of Vignette Rmd File](https://github.com/R-4-Data-Science/Final_Project_Group7/blob/main/Vignette.Rmd)
 
 Package name: ```logreg```
 
@@ -267,15 +264,4 @@ plot_metric(resp=Y, pred=X, metric = "Diagnostic_Odds_Ratio")
 
 We get this result because when the cut-off is smaller than 0.3, the value of ```FN``` is 0. And according to the formula: Diagnostic_Odds_Ratio=LR+/LR-, when ```FN``` is 0, the value of Diagnostic_Odds_Ratio should converge to infinite and does not exist. So in this situation, the value of Diagnostic_Odds_Ratio could get its value only when the cut-off value is larger than 0.3. When the cut-off value is larger than 0.3, the value of Diagnostic Odds Ratio decreases first but then increases a little at the point of 0.7. When the cut-off value is 0.7, it gets its minimum value which is about 50.
 
-### Reference
-
-This package is developed based on the text book: [Text Book](https://smac-group.github.io/ds/) 
-
-The function ```log_plot``` is developed by the online instruction: [Fitted Curved Line](https://www.geeksforgeeks.org/how-to-plot-a-logistic-regression-curve-in-r/)
-
-and [Fitted Curved Line 2](https://www.statology.org/plot-logistic-regression-in-r/)
-
-The knowledge of confusion matrix is based on the online instruction: [Confusion Matrix](https://en.wikipedia.org/wiki/Confusion_matrix)
-
-The structure of this file is developed by the sample document: [irg vignette](https://smac-group.github.io/irg/articles/vignette.html)
 
