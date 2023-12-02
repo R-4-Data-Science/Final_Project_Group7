@@ -19,18 +19,18 @@ devtools::install_github("R-4-Data-Science/Final_Project_Group7/logreg")
     ## Downloading GitHub repo R-4-Data-Science/Final_Project_Group7@HEAD
 
     ## ── R CMD build ─────────────────────────────────────────────────────────────────
-    ##          checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpE7SmKh\remotes36186c694aed\R-4-Data-Science-Final_Project_Group7-138be2e\logreg/DESCRIPTION' ...     checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpE7SmKh\remotes36186c694aed\R-4-Data-Science-Final_Project_Group7-138be2e\logreg/DESCRIPTION' ...   ✔  checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpE7SmKh\remotes36186c694aed\R-4-Data-Science-Final_Project_Group7-138be2e\logreg/DESCRIPTION'
+    ##       ✔  checking for file 'C:\Users\张易中\AppData\Local\Temp\Rtmp0sUcix\remotes4958787332a5\R-4-Data-Science-Final_Project_Group7-2c66e98\logreg/DESCRIPTION'
     ##       ─  preparing 'logreg':
     ##    checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
     ##       ─  checking for LF line-endings in source and make files and shell scripts
-    ##       ─  checking for empty or unneeded directories
+    ##   ─  checking for empty or unneeded directories
     ##      Omitted 'LazyData' from DESCRIPTION
     ##       ─  building 'logreg_0.1.0.tar.gz'
     ##      
     ## 
 
     ## Warning in i.p(...):
-    ## 安装程序包'C:/Users/张易中/AppData/Local/Temp/RtmpE7SmKh/file36188d8a4/logreg_0.1.0.tar.gz'时退出狀態的值不是0
+    ## 安装程序包'C:/Users/张易中/AppData/Local/Temp/Rtmp0sUcix/file49586430151b/logreg_0.1.0.tar.gz'时退出狀態的值不是0
 
 ``` r
 library(logreg)
@@ -94,15 +94,15 @@ predictor variables.
 ```
 
     ##                [,1]          [,2]
-    ##  [1,]  0.3242261148  1.9709420982
-    ##  [2,] -0.0982484548 -0.0568395724
-    ##  [3,] -0.9999730226  0.3643798531
-    ##  [4,] -0.2357509178 -0.1551622660
-    ##  [5,] -0.3882333175  0.1360323810
-    ##  [6,]  0.0003136353  0.0004047751
-    ##  [7,] -0.7518762360  0.7431255206
-    ##  [8,] -0.7354587170  0.4886409003
-    ##  [9,] -0.4097121177  0.6268156655
+    ##  [1,]  0.1617753163  1.2553666793
+    ##  [2,] -0.0881862488 -0.0576101897
+    ##  [3,] -0.5514768624  0.3293222954
+    ##  [4,] -0.2069602139 -0.1589508820
+    ##  [5,] -0.2901540489  0.0900943607
+    ##  [6,]  0.0003163432  0.0003869603
+    ##  [7,] -0.3199266699  0.5621348259
+    ##  [8,] -0.3474798513  0.2088635748
+    ##  [9,] -0.1085790950  0.7576617177
 
 ## log_plot
 

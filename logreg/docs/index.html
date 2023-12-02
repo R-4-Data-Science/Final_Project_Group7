@@ -70,18 +70,18 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="do">## Downloading GitHub repo R-4-Data-Science/Final_Project_Group7@HEAD</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="do">## ── R CMD build ─────────────────────────────────────────────────────────────────</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="do">##          checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpE7SmKh\remotes36186c694aed\R-4-Data-Science-Final_Project_Group7-138be2e\logreg/DESCRIPTION' ...     checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpE7SmKh\remotes36186c694aed\R-4-Data-Science-Final_Project_Group7-138be2e\logreg/DESCRIPTION' ...   ✔  checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpE7SmKh\remotes36186c694aed\R-4-Data-Science-Final_Project_Group7-138be2e\logreg/DESCRIPTION'</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="do">##       ✔  checking for file 'C:\Users\张易中\AppData\Local\Temp\Rtmp0sUcix\remotes4958787332a5\R-4-Data-Science-Final_Project_Group7-2c66e98\logreg/DESCRIPTION'</span></span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="do">##       ─  preparing 'logreg':</span></span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="do">##    checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information</span></span>
 <span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="do">##       ─  checking for LF line-endings in source and make files and shell scripts</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="do">##       ─  checking for empty or unneeded directories</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="do">##   ─  checking for empty or unneeded directories</span></span>
 <span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="do">##      Omitted 'LazyData' from DESCRIPTION</span></span>
 <span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="do">##       ─  building 'logreg_0.1.0.tar.gz'</span></span>
 <span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="do">##      </span></span>
 <span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a></span>
 <span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="do">## Warning in i.p(...):</span></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="do">## 安装程序包'C:/Users/张易中/AppData/Local/Temp/RtmpE7SmKh/file36188d8a4/logreg_0.1.0.tar.gz'时退出狀態的值不是0</span></span></code></pre></div>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="do">## 安装程序包'C:/Users/张易中/AppData/Local/Temp/Rtmp0sUcix/file49586430151b/logreg_0.1.0.tar.gz'时退出狀態的值不是0</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">logreg</span><span class="op">)</span></span></code></pre></div>
 <p>In order to show examples, we will load data from class and format it for use.</p>
@@ -127,15 +127,15 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">Boot_CI_demo</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Boot_CI.html">Boot_CI</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">20</span>, alpha<span class="op">=</span><span class="fl">0.05</span>, pred<span class="op">=</span> <span class="va">X</span>, resp<span class="op">=</span> <span class="va">Y</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">##                [,1]          [,2]</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="do">##  [1,]  0.3242261148  1.9709420982</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="do">##  [2,] -0.0982484548 -0.0568395724</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="do">##  [3,] -0.9999730226  0.3643798531</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="do">##  [4,] -0.2357509178 -0.1551622660</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="do">##  [5,] -0.3882333175  0.1360323810</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="do">##  [6,]  0.0003136353  0.0004047751</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="do">##  [7,] -0.7518762360  0.7431255206</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="do">##  [8,] -0.7354587170  0.4886409003</span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="do">##  [9,] -0.4097121177  0.6268156655</span></span></code></pre></div>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="do">##  [1,]  0.1617753163  1.2553666793</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="do">##  [2,] -0.0881862488 -0.0576101897</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="do">##  [3,] -0.5514768624  0.3293222954</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="do">##  [4,] -0.2069602139 -0.1589508820</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="do">##  [5,] -0.2901540489  0.0900943607</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="do">##  [6,]  0.0003163432  0.0003869603</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="do">##  [7,] -0.3199266699  0.5621348259</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="do">##  [8,] -0.3474798513  0.2088635748</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="do">##  [9,] -0.1085790950  0.7576617177</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="log_plot">log_plot<a class="anchor" aria-label="anchor" href="#log_plot"></a>
