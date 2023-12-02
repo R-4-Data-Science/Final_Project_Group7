@@ -19,18 +19,18 @@ devtools::install_github("R-4-Data-Science/Final_Project_Group7/logreg")
     ## Downloading GitHub repo R-4-Data-Science/Final_Project_Group7@HEAD
 
     ## ── R CMD build ─────────────────────────────────────────────────────────────────
-    ##          checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpCk5kOY\remotes351c2d5cc09\R-4-Data-Science-Final_Project_Group7-b21450c\logreg/DESCRIPTION' ...     checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpCk5kOY\remotes351c2d5cc09\R-4-Data-Science-Final_Project_Group7-b21450c\logreg/DESCRIPTION' ...   ✔  checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpCk5kOY\remotes351c2d5cc09\R-4-Data-Science-Final_Project_Group7-b21450c\logreg/DESCRIPTION'
+    ##          checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpE7SmKh\remotes36186c694aed\R-4-Data-Science-Final_Project_Group7-138be2e\logreg/DESCRIPTION' ...     checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpE7SmKh\remotes36186c694aed\R-4-Data-Science-Final_Project_Group7-138be2e\logreg/DESCRIPTION' ...   ✔  checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpE7SmKh\remotes36186c694aed\R-4-Data-Science-Final_Project_Group7-138be2e\logreg/DESCRIPTION'
     ##       ─  preparing 'logreg':
     ##    checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
     ##       ─  checking for LF line-endings in source and make files and shell scripts
-    ##   ─  checking for empty or unneeded directories
+    ##       ─  checking for empty or unneeded directories
     ##      Omitted 'LazyData' from DESCRIPTION
     ##       ─  building 'logreg_0.1.0.tar.gz'
     ##      
     ## 
 
     ## Warning in i.p(...):
-    ## 安装程序包'C:/Users/张易中/AppData/Local/Temp/RtmpCk5kOY/file351c65184ad6/logreg_0.1.0.tar.gz'时退出狀態的值不是0
+    ## 安装程序包'C:/Users/张易中/AppData/Local/Temp/RtmpE7SmKh/file36188d8a4/logreg_0.1.0.tar.gz'时退出狀態的值不是0
 
 ``` r
 library(logreg)
@@ -94,15 +94,15 @@ predictor variables.
 ```
 
     ##                [,1]          [,2]
-    ##  [1,]  0.2391913267  2.7748437290
-    ##  [2,] -0.0880387930 -0.0548472264
-    ##  [3,] -0.6018429412 -0.0480744226
-    ##  [4,] -0.2324334131 -0.1577364182
-    ##  [5,] -0.2238699007  0.1041121677
-    ##  [6,]  0.0003067031  0.0004063003
-    ##  [7,] -0.7380366497  0.5206072768
-    ##  [8,] -0.5900308585  0.2163755501
-    ##  [9,] -0.2420537746  0.6126466147
+    ##  [1,]  0.3242261148  1.9709420982
+    ##  [2,] -0.0982484548 -0.0568395724
+    ##  [3,] -0.9999730226  0.3643798531
+    ##  [4,] -0.2357509178 -0.1551622660
+    ##  [5,] -0.3882333175  0.1360323810
+    ##  [6,]  0.0003136353  0.0004047751
+    ##  [7,] -0.7518762360  0.7431255206
+    ##  [8,] -0.7354587170  0.4886409003
+    ##  [9,] -0.4097121177  0.6268156655
 
 ## log_plot
 
