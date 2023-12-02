@@ -19,18 +19,18 @@ devtools::install_github("R-4-Data-Science/Final_Project_Group7/logreg")
     ## Downloading GitHub repo R-4-Data-Science/Final_Project_Group7@HEAD
 
     ## ── R CMD build ─────────────────────────────────────────────────────────────────
-    ##          checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpmQD6Lp\remotes5cc3bc36c8e\R-4-Data-Science-Final_Project_Group7-f5680d3\logreg/DESCRIPTION' ...  ✔  checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpmQD6Lp\remotes5cc3bc36c8e\R-4-Data-Science-Final_Project_Group7-f5680d3\logreg/DESCRIPTION'
+    ##          checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpYFkTMA\remotes36d4736a6a88\R-4-Data-Science-Final_Project_Group7-45ea69d\logreg/DESCRIPTION' ...     checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpYFkTMA\remotes36d4736a6a88\R-4-Data-Science-Final_Project_Group7-45ea69d\logreg/DESCRIPTION' ...   ✔  checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpYFkTMA\remotes36d4736a6a88\R-4-Data-Science-Final_Project_Group7-45ea69d\logreg/DESCRIPTION'
     ##       ─  preparing 'logreg':
     ##    checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
     ##       ─  checking for LF line-endings in source and make files and shell scripts
-    ##   ─  checking for empty or unneeded directories
+    ##       ─  checking for empty or unneeded directories
     ##      Omitted 'LazyData' from DESCRIPTION
     ##       ─  building 'logreg_0.1.0.tar.gz'
     ##      
     ## 
 
     ## Warning in i.p(...):
-    ## 安装程序包'C:/Users/张易中/AppData/Local/Temp/RtmpmQD6Lp/file5cc1d561db3/logreg_0.1.0.tar.gz'时退出狀態的值不是0
+    ## 安装程序包'C:/Users/张易中/AppData/Local/Temp/RtmpYFkTMA/file36d443c57ac/logreg_0.1.0.tar.gz'时退出狀態的值不是0
 
 ``` r
 library(logreg)
@@ -93,16 +93,16 @@ predictor variables.
 (Boot_CI_demo <- Boot_CI(n=20, alpha=0.05, pred= X, resp= Y))
 ```
 
-    ##                [,1]         [,2]
-    ##  [1,]  0.0777721822  1.933748041
-    ##  [2,] -0.0955752937 -0.052638803
-    ##  [3,] -0.7424489645  0.423679144
-    ##  [4,] -0.2279536863 -0.150887878
-    ##  [5,] -0.3678999428  0.066747090
-    ##  [6,]  0.0003130421  0.000395138
-    ##  [7,] -0.4872871502  0.341299562
-    ##  [8,] -0.2432183229  0.468932010
-    ##  [9,] -0.3686206648  0.759621126
+    ##                [,1]          [,2]
+    ##  [1,]  0.3856614504  1.4825236677
+    ##  [2,] -0.0855006285 -0.0572141992
+    ##  [3,] -0.8954784673  0.2920572121
+    ##  [4,] -0.2124286982 -0.1534651414
+    ##  [5,] -0.2891414357  0.0758457393
+    ##  [6,]  0.0002964623  0.0003765884
+    ##  [7,] -0.4974414819  0.5034305208
+    ##  [8,] -0.6773325793  0.3384871493
+    ##  [9,] -0.3651162135  0.9067739596
 
 ## log_plot
 

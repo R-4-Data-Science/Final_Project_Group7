@@ -70,18 +70,18 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="do">## Downloading GitHub repo R-4-Data-Science/Final_Project_Group7@HEAD</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="do">## ── R CMD build ─────────────────────────────────────────────────────────────────</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="do">##          checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpmQD6Lp\remotes5cc3bc36c8e\R-4-Data-Science-Final_Project_Group7-f5680d3\logreg/DESCRIPTION' ...  ✔  checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpmQD6Lp\remotes5cc3bc36c8e\R-4-Data-Science-Final_Project_Group7-f5680d3\logreg/DESCRIPTION'</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="do">##          checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpYFkTMA\remotes36d4736a6a88\R-4-Data-Science-Final_Project_Group7-45ea69d\logreg/DESCRIPTION' ...     checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpYFkTMA\remotes36d4736a6a88\R-4-Data-Science-Final_Project_Group7-45ea69d\logreg/DESCRIPTION' ...   ✔  checking for file 'C:\Users\张易中\AppData\Local\Temp\RtmpYFkTMA\remotes36d4736a6a88\R-4-Data-Science-Final_Project_Group7-45ea69d\logreg/DESCRIPTION'</span></span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="do">##       ─  preparing 'logreg':</span></span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="do">##    checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information</span></span>
 <span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="do">##       ─  checking for LF line-endings in source and make files and shell scripts</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="do">##   ─  checking for empty or unneeded directories</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="do">##       ─  checking for empty or unneeded directories</span></span>
 <span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="do">##      Omitted 'LazyData' from DESCRIPTION</span></span>
 <span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="do">##       ─  building 'logreg_0.1.0.tar.gz'</span></span>
 <span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="do">##      </span></span>
 <span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a></span>
 <span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="do">## Warning in i.p(...):</span></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="do">## 安装程序包'C:/Users/张易中/AppData/Local/Temp/RtmpmQD6Lp/file5cc1d561db3/logreg_0.1.0.tar.gz'时退出狀態的值不是0</span></span></code></pre></div>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="do">## 安装程序包'C:/Users/张易中/AppData/Local/Temp/RtmpYFkTMA/file36d443c57ac/logreg_0.1.0.tar.gz'时退出狀態的值不是0</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">logreg</span><span class="op">)</span></span></code></pre></div>
 <p>In order to show examples, we will load data from class and format it for use.</p>
@@ -126,16 +126,16 @@
 <p>This function will conduct a bootstrap routine for each predictor or beta value for the logistic regression curve. The user is able to choose the amount of bootstraps to conduct as well as the confidence level for the intervals. Here, we will use it on the loaded data. We will use the default values for n and alpha and X and Y for our response and predictor variables.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">Boot_CI_demo</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Boot_CI.html">Boot_CI</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">20</span>, alpha<span class="op">=</span><span class="fl">0.05</span>, pred<span class="op">=</span> <span class="va">X</span>, resp<span class="op">=</span> <span class="va">Y</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">##                [,1]         [,2]</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="do">##  [1,]  0.0777721822  1.933748041</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="do">##  [2,] -0.0955752937 -0.052638803</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="do">##  [3,] -0.7424489645  0.423679144</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="do">##  [4,] -0.2279536863 -0.150887878</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="do">##  [5,] -0.3678999428  0.066747090</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="do">##  [6,]  0.0003130421  0.000395138</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="do">##  [7,] -0.4872871502  0.341299562</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="do">##  [8,] -0.2432183229  0.468932010</span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="do">##  [9,] -0.3686206648  0.759621126</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">##                [,1]          [,2]</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="do">##  [1,]  0.3856614504  1.4825236677</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="do">##  [2,] -0.0855006285 -0.0572141992</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="do">##  [3,] -0.8954784673  0.2920572121</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="do">##  [4,] -0.2124286982 -0.1534651414</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="do">##  [5,] -0.2891414357  0.0758457393</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="do">##  [6,]  0.0002964623  0.0003765884</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="do">##  [7,] -0.4974414819  0.5034305208</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="do">##  [8,] -0.6773325793  0.3384871493</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="do">##  [9,] -0.3651162135  0.9067739596</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="log_plot">log_plot<a class="anchor" aria-label="anchor" href="#log_plot"></a>
