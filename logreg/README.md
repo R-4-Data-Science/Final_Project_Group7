@@ -19,7 +19,7 @@ devtools::install_github("R-4-Data-Science/Final_Project_Group7/logreg")
     ## Downloading GitHub repo R-4-Data-Science/Final_Project_Group7@HEAD
 
     ## ── R CMD build ─────────────────────────────────────────────────────────────────
-    ##       ✔  checking for file 'C:\Users\张易中\AppData\Local\Temp\Rtmp0sUcix\remotes4958787332a5\R-4-Data-Science-Final_Project_Group7-2c66e98\logreg/DESCRIPTION'
+    ##          checking for file 'C:\Users\张易中\AppData\Local\Temp\Rtmp4m9kUZ\remotes1fc4b0d4c60\R-4-Data-Science-Final_Project_Group7-bc95b40\logreg/DESCRIPTION' ...  ✔  checking for file 'C:\Users\张易中\AppData\Local\Temp\Rtmp4m9kUZ\remotes1fc4b0d4c60\R-4-Data-Science-Final_Project_Group7-bc95b40\logreg/DESCRIPTION'
     ##       ─  preparing 'logreg':
     ##    checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
     ##       ─  checking for LF line-endings in source and make files and shell scripts
@@ -30,7 +30,7 @@ devtools::install_github("R-4-Data-Science/Final_Project_Group7/logreg")
     ## 
 
     ## Warning in i.p(...):
-    ## 安装程序包'C:/Users/张易中/AppData/Local/Temp/Rtmp0sUcix/file49586430151b/logreg_0.1.0.tar.gz'时退出狀態的值不是0
+    ## 安装程序包'C:/Users/张易中/AppData/Local/Temp/Rtmp4m9kUZ/file1fc469c03609/logreg_0.1.0.tar.gz'时退出狀態的值不是0
 
 ``` r
 library(logreg)
@@ -94,15 +94,15 @@ predictor variables.
 ```
 
     ##                [,1]          [,2]
-    ##  [1,]  0.1617753163  1.2553666793
-    ##  [2,] -0.0881862488 -0.0576101897
-    ##  [3,] -0.5514768624  0.3293222954
-    ##  [4,] -0.2069602139 -0.1589508820
-    ##  [5,] -0.2901540489  0.0900943607
-    ##  [6,]  0.0003163432  0.0003869603
-    ##  [7,] -0.3199266699  0.5621348259
-    ##  [8,] -0.3474798513  0.2088635748
-    ##  [9,] -0.1085790950  0.7576617177
+    ##  [1,]  0.2896451099  1.2909191875
+    ##  [2,] -0.0984117397 -0.0582313843
+    ##  [3,] -0.7043430491  0.1112202384
+    ##  [4,] -0.2152467677 -0.1526217661
+    ##  [5,] -0.2859754372  0.0377616034
+    ##  [6,]  0.0003119158  0.0004424906
+    ##  [7,] -0.3097950446  0.7406016292
+    ##  [8,] -0.9716988933  0.3168074010
+    ##  [9,] -0.0149817998  0.7819198710
 
 ## log_plot
 
